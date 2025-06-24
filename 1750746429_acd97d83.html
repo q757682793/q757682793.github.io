@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>性能压测报告 - sycpb.cpm.cpm-log</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">性能压测报告 - sycpb.cpm.cpm-log</h1>
+        <p class="text-gray-600 mb-6">报告生成时间: <span id="current-time"></span></p>
+        
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">1. 测试概述</h2>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <p class="mb-2"><span class="font-medium">应用名称:</span> sycpb.cpm.cpm-log</p>
+                <p class="mb-2"><span class="font-medium">测试时间范围:</span> 2025-06-24 13:10:00 至 2025-06-24 13:40:00</p>
+                <p class="mb-2"><span class="font-medium">测试环境:</span> pre</p>
+                <p class="mb-2"><span class="font-medium">监控面板:</span> <a href="https://moni.bilibili.co/d/aek67tc41iio0f/af0c9ab?orgId=1&from=1719299400000&to=1719301200000&var-app=sycpb.cpm.cpm-log&var-env=pre" target="_blank" class="text-blue-600 hover:underline">Prometheus监控面板</a></p>
+                <p class="mb-2"><span class="font-medium">机器配置:</span> 46C 34G</p>
+                <p class="mb-2"><span class="font-medium">JVM参数:</span></p>
+                <pre class="bg-gray-200 p-3 rounded overflow-x-auto text-sm">-XX:+CMSClassUnloadingEnabled -XX:CMSFullGCsBeforeCompaction=5 -XX:CMSInitiatingOccupancyFraction=70 -XX:CMSMaxAbortablePrecleanTime=500 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/data/log/tomcat/dump/heap_hprof_250620_160704.bin -XX:InitialHeapSize=15032385536 -XX:+ManagementServer -XX:MaxHeapSize=15032385536 -XX:MaxNewSize=697933824 -XX:MetaspaceSize=268435456 -XX:NewSize=697933824 -XX:OldPLABSize=16 -XX:OldSize=1395867648 -XX:+PrintGC -XX:+PrintGCDateStamps -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:SurvivorRatio=8 -XX:+UseCMSCompactAtFullCollection -XX:+UseCMSInitiatingOccupancyOnly -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:+UseParNewGC</pre>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">2. 性能指标分析</h2>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-medium text-gray-700 mb-3">2.1 QPS表现</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-2 px-4 border text-left">端点</th>
+                                <th class="py-2 px-4 border text-left">压测峰值QPS</th>
+                                <th class="py-2 px-4 border text-left">生产7日峰值QPS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4 border">/api/conversion/mobile/v2</td>
+                                <td class="py-2 px-4 border">15,007.66</td>
+                                <td class="py-2 px-4 border">5,689.95</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border">/api/fees/wise</td>
+                                <td class="py-2 px-4 border">15,039.69</td>
+                                <td class="py-2 px-4 border">2,865.35</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border">/checkhealth.do</td>
+                                <td class="py-2 px-4 border">1</td>
+                                <td class="py-2 px-4 border">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="font-medium text-gray-700 mt-6 mb-3">2.2 响应时间</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-2 px-4 border text-left">端点</th>
+                                <th class="py-2 px-4 border text-left">压测平均响应时间(ms)</th>
+                                <th class="py-2 px-4 border text-left">压测P99延迟(ms)</th>
+                                <th class="py-2 px-4 border text-left">生产1日平响(ms)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4 border">/api/conversion/mobile/v2</td>
+                                <td class="py-2 px-4 border">0.07 - 0.11</td>
+                                <td class="py-2 px-4 border">1.21 - 3.30</td>
+                                <td class="py-2 px-4 border">0.16</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border">/api/fees/wise</td>
+                                <td class="py-2 px-4 border">0.04 - 0.39</td>
+                                <td class="py-2 px-4 border">2.15 - 9.91</td>
+                                <td class="py-2 px-4 border">0.85</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="font-medium text-gray-700 mt-6 mb-3">2.3 系统资源使用情况</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-2 px-4 border text-left">指标</th>
+                                <th class="py-2 px-4 border text-left">峰值</th>
+                                <th class="py-2 px-4 border text-left">趋势</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4 border">CPU使用率(%)</td>
+                                <td class="py-2 px-4 border">59.20% (60%硬限)</td>
+                                <td class="py-2 px-4 border">随QPS增长而上升</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border">JVM堆内存使用量</td>
+                                <td class="py-2 px-4 border">16.7GB (MaxHeap=15GB)</td>
+                                <td class="py-2 px-4 border">频繁GC，内存波动大</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border">网络接收速率</td>
+                                <td class="py-2 px-4 border">99MB/s</td>
+                                <td class="py-2 px-4 border">与QPS正相关</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border">TCP连接数</td>
+                                <td class="py-2 px-4 border">216 (ESTABLISHED)</td>
+                                <td class="py-2 px-4 border">随负载增加而上升</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="font-medium text-gray-700 mt-6 mb-3">2.4 GC情况</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-2 px-4 border text-left">GC类型</th>
+                                <th class="py-2 px-4 border text-left">最长时间(ms)</th>
+                                <th class="py-2 px-4 border text-left">趋势</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4 border">ParNew</td>
+                                <td class="py-2 px-4 border">1.25</td>
+                                <td class="py-2 px-4 border">随内存使用增加而变长</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="font-medium text-gray-700 mt-6 mb-3">2.5 错误率</h3>
+                <p class="mb-2">所有端点错误率为0，系统在高压下仍能保持稳定。</p>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">3. 瓶颈分析</h2>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <ol class="list-decimal pl-6 space-y-3">
+                    <li><span class="font-medium">内存瓶颈:</span> JVM堆内存使用量(16.7GB)超过了最大堆大小(15GB)，可能导致OOM</li>
+                    <li><span class="font-medium">CPU瓶颈:</span> CPU使用率接近硬限60%，可能存在计算资源不足</li>
+                    <li><span class="font-medium">GC效率问题:</span> ParNew GC时间最长达到1.25ms，频繁GC影响性能</li>
+                    <li><span class="font-medium">P99延迟较高:</span> /api/fees/wise端点在高压下P99延迟达到9.91ms</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">4. 优化建议</h2>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <ol class="list-decimal pl-6 space-y-3">
+                    <li><span class="font-medium">调整JVM配置:</span> 增加最大堆内存到至少18GB，调整CMSInitiatingOccupancyFraction为75</li>
+                    <li><span class="font-medium">优化GC策略:</span> 考虑使用G1GC替换CMS+ParNew组合，减少暂停时间</li>
+                    <li><span class="font-medium">代码优化:</span> 分析/api/fees/wise端点高延迟原因，优化慢查询或复杂计算</li>
+                    <li><span class="font-medium">资源扩容:</span> 考虑增加Pod的CPU配额或副本数，缓解CPU瓶颈</li>
+                    <li><span class="font-medium">连接池优化:</span> 检查并优化TCP连接复用情况，减少连接建立开销</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">5. 容量分析</h2>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-2 px-4 border text-left">端点</th>
+                                <th class="py-2 px-4 border text-left">压测峰值QPS</th>
+                                <th class="py-2 px-4 border text-left">生产7日峰值QPS</th>
+                                <th class="py-2 px-4 border text-left">容量余量</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4 border">/api/conversion/mobile/v2</td>
+                                <td class="py-2 px-4 border">15,007.66</td>
+                                <td class="py-2 px-4 border">5,689.95</td>
+                                <td class="py-2 px-4 border">2.64倍</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border">/api/fees/wise</td>
+                                <td class="py-2 px-4 border">15,039.69</td>
+                                <td class="py-2 px-4 border">2,865.35</td>
+                                <td class="py-2 px-4 border">5.25倍</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">6. 结论</h2>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <p class="mb-4">压测结果表明应用在15k QPS下能够稳定运行，但存在以下问题需要注意：</p>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>JVM内存配置不合理，需要调整以避免OOM</li>
+                    <li>CPU资源接近上限，建议监控生产环境CPU使用情况</li>
+                    <li>部分端点P99延迟较高，需要针对性优化</li>
+                </ul>
+                <p class="mt-4">整体容量满足当前生产需求的2.6-5.2倍，短期内无需扩容。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('current-time').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
